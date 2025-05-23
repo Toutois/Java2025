@@ -6,12 +6,11 @@ public class ApiExample {
             ApiConfig cfg = new ApiConfig();
             ApiClient client = new ApiClient(cfg);
 
-            String dronesJson = client.getJson("/api/drones/");
-            System.out.println("Dronetypes JSON:\n" + dronesJson);
+            String dronesJson = client.getJson("/api/drones/?limit=100&offset=0");
+            System.out.println("Drones JSON:\n" + dronesJson);
 
-            String payload = "{\"id\":999,\"typename\":\"TestDrone\"}";
-            String result  = client.postJson("/api/dronetypes/", payload);
-            System.out.println("POST response:\n" + result);
+            String typesJson = client.getJson("/api/dronetypes/?limit=100&offset=0");
+            System.out.println("Dronetypes JSON:\n" + typesJson);
         } catch (Exception e) {
             e.printStackTrace();
         }

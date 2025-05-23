@@ -24,28 +24,13 @@ public class ApiClient {
         HttpRequest req = HttpRequest.newBuilder()
             .uri(URI.create(baseUrl + path))
             .header("Authorization", "Token " + token)
-                .header("Accept", "application/json")
+            .header("Accept", "application/json")
             .GET()
             .build();
         HttpResponse<String> resp = client.send(req, HttpResponse.BodyHandlers.ofString());
         int status = resp.statusCode();
         if (status < 200 || status >= 300) {
             throw new RuntimeException("GET " + path + " -> HTTP " + status);
-        }
-        return resp.body();
-    }
-
-    public String postJson(String path, String jsonBody) throws IOException, InterruptedException {
-        HttpRequest req = HttpRequest.newBuilder()
-            .uri(URI.create(baseUrl + path))
-            .header("Authorization", "Token " + token)
-            .header("Content-Type", "application/json")
-            .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
-            .build();
-        HttpResponse<String> resp = client.send(req, HttpResponse.BodyHandlers.ofString());
-        int status = resp.statusCode();
-        if (status < 200 || status >= 300) {
-            throw new RuntimeException("POST " + path + " → HTTP " + status);
         }
         return resp.body();
     }
