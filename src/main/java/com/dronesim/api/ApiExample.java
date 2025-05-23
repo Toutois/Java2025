@@ -1,23 +1,17 @@
 package com.dronesim.api;
 
 public class ApiExample {
-    public static void main(String[] args) {
+    public static void main (String[] args) {
         try {
             ApiConfig cfg = new ApiConfig();
-            System.out.println(">> LOADED baseUrl = [" + cfg.getBaseUrl() + "]");
             ApiClient client = new ApiClient(cfg);
-            client.login();
 
-            String DronesOverviewJson = client.getJson("/simulator/drones/");
-            System.out.println("Response GET 'Drones Overview' /simulator/drones/: \n" + DronesOverviewJson);
+            String dronesJson = client.getJson("/api/drones/");
+            System.out.println("Dronetypes JSON:\n" + dronesJson);
 
-            String newDrone = "{" +
-                "\"id\":\"drone-123\"," +
-                "\"lat\":48.1351," +
-                "\"lon\":11.5820" +
-                "}";
-            String createJson = client.postJson("/simulator/drones/", newDrone);
-            System.out.println("Response POST 'Drones Overview' /simulator/drones/ :\n" + createJson);
+            String payload = "{\"id\":999,\"typename\":\"TestDrone\"}";
+            String result  = client.postJson("/api/dronetypes/", payload);
+            System.out.println("POST response:\n" + result);
         } catch (Exception e) {
             e.printStackTrace();
         }

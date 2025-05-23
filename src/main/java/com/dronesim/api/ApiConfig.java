@@ -1,35 +1,27 @@
 package com.dronesim.api;
 
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.Properties;
 
 public class ApiConfig {
     private final String baseUrl;
-    private final String username;
-    private final String password;
-    private final String basicAuthHeader;
-    
+    private final String token;
+
     public ApiConfig() {
         try (InputStream in = getClass().getClassLoader().getResourceAsStream("config.properties")) {
-            if (in == null) 
-                throw new RuntimeException("config.properties not found");
+            if (in == null) throw new RuntimeException("config.propertoes not found");
             Properties props = new Properties();
             props.load(in);
             this.baseUrl = props.getProperty("api.baseUrl");
-            this.username = props.getProperty("api.username");
-            this.password = props.getProperty("api.password");
-            String cred = username + ":" + password;
-            this.basicAuthHeader = Base64.getEncoder().encodeToString(cred.getBytes(StandardCharsets.UTF_8));
+            this.token = props.getProperty("api.token");
+            if (baseUrl == null || token == null) {
+                throw new RuntimeException("api.baseUrl o api.token missin in config.properties");
+            }
         } catch (Exception e) {
-            throw new RuntimeException("Error while loading configuration", e);
+            throw new RuntimeException("Error while loading configuration");
         }
     }
 
     public String getBaseUrl() { return baseUrl; }
-    public String getBasicAuthHeader() { return "Basic " + basicAuthHeader; }
-    public String getUsername() { return username; }
-    public String getPassword() { return password; }
-
+    public String getToken() { return token; }
 }
