@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "src.main.java.com.DroneCatalog.Main",
+            "projectName": "Java2025_a1b35158"
+        },
+        {
+            "type": "java",
+            "name": "MainApp",
+            "request": "launch",
+            "mainClass": "src.main.java.com.DroneCatalog.MainApp",
+            "projectName": "Java2025_a1b35158"
+        },
+        {
+            "type": "java",
+            "name": "Main(1)",
+            "request": "launch",
+            "mainClass": "com.DroneCatalog.Main",
+            "projectName": "Java2025"
+        },
+        {
+            "type": "java",
+            "name": "MainApp(1)",
+            "request": "launch",
+            "mainClass": "com.DroneCatalog.MainApp",
+            "projectName": "Java2025"
+        }
+    ]
+}
