@@ -1,3 +1,4 @@
+
 # Maven
 target/
 *.class
@@ -5,7 +6,6 @@ target/
 # IDE
 .idea/
 *.iml
-.vscode/
 
 # Logs
 *.log
@@ -16,5 +16,34 @@ hs_err_pid*
 bin/
 
 # OS-specific files
-.DS_Store
 Thumbs.db
+
+### IntelliJ IDEA ###
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
