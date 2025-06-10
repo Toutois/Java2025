@@ -1,3 +1,23 @@
+
+# Maven
+target/
+*.class
+
+# IDE
+.idea/
+*.iml
+
+# Logs
+*.log
+hs_err_pid*
+
+# Compiled files
+*.jar
+bin/
+
+# OS-specific files
+Thumbs.db
+
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
