@@ -1,8 +1,7 @@
-//import java.awt.GridBagConstraints;
-//import java.awt.GridBagLayout;
-//import java.awt.Insets;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-import java.awt.*;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,13 +9,13 @@ import javax.swing.JTextField;
 
 public class ConnectionPanel extends JPanel{
 
-    private JLabel tokenLabel;
-    private JLabel urlLabel;
+    private final JLabel tokenLabel;
+    private final JLabel urlLabel;
 
-    private JTextField tokenTxt;
-    private JTextField urlTxt;
+    private final JTextField tokenTxt;
+    private final JTextField urlTxt;
 
-    private JButton connectBtn;
+    private final JButton connectBtn;
 
     public ConnectionPanel() {
         
