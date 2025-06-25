@@ -21,7 +21,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.1.0</version>
         <configuration>
-          <mainClass>com.dronesim.api.ApiExample</mainClass>
+          <mainClass>com.dronesim.test.ApiExample</mainClass>
         </configuration>
       </plugin>
     </plugins>
@@ -29,5 +29,11 @@
 
   <!-- keine externen Dependencies nötig für java.net.http und Base64 -->
   <dependencies>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20240303</version>
+    </dependency>
   </dependencies>
 </project>
+
