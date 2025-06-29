@@ -95,13 +95,14 @@ public class ManualJsonParser implements DataProvider {
             dd.setDrone(map.get("drone"));
             dd.setTimestamp(map.get("timestamp"));
             dd.setSpeed(Double.parseDouble(map.get("speed")));
-            dd.setAlignRoll(Double.parseDouble(map.getOrDefault("alignRoll", "0")));
-            dd.setAlignPitch(Double.parseDouble(map.getOrDefault("alignPitch", "0")));
-            dd.setAlignYaw(Double.parseDouble(map.getOrDefault("alignYaw", "0")));
+            dd.setAlignRoll(Double.parseDouble(map.getOrDefault("align_roll", "0")));
+            dd.setAlignPitch(Double.parseDouble(map.getOrDefault("align_pitch", "0")));
+            dd.setAlignYaw(Double.parseDouble(map.getOrDefault("align_yaw", "0")));
+
             dd.setLatitude(Double.parseDouble(map.getOrDefault("latitude", "0")));
             dd.setLongitude(Double.parseDouble(map.getOrDefault("longitude", "0")));
-            dd.setBatteryStatus(Double.parseDouble(map.getOrDefault("batteryStatus", "0")));
-            dd.setLastScene(map.getOrDefault("lastScene", ""));
+            dd.setBatteryStatus((Double.parseDouble(map.getOrDefault("battery_status", "0"))/100));
+            dd.setLastScene(map.getOrDefault("last_seen", ""));
             dd.setStatus(map.getOrDefault("status", "offline"));
             list.add(dd);
         }
