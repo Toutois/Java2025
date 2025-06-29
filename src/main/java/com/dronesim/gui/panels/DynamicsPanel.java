@@ -2,7 +2,6 @@ package com.dronesim.gui.panels;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.dronesim.gui.components.DroneDynamicsCard;
@@ -10,18 +9,20 @@ import com.dronesim.model.DroneDynamics;
 import com.dronesim.model.PagedDataProvider;
 
 public class DynamicsPanel extends JPanel{
-    private final List<DroneDynamics> dynamics;
+    private final PagedDataProvider<DroneDynamics> provider;
     private final JPanel cardContainer;
     private final JButton prevBtn;
     private final JButton nextBtn;
     private final JLabel pageLabel;
-    private int currentPage = 0;
+    
     private final int PAGE_SIZE = 10;
-
-    public DynamicsPanel(List<DroneDynamics> data) {
-        this.dynamics = data;
-        setLayout(new BorderLayout());
-
+    private int currentPage = 0;
+    private List<DroneDynamics> currentPageData;
+    
+    public DynamicsPanel(PagedDataProvider<DroneDynamics> provider) {
+        this.provider = provider;
+        setLayout(new BorderLayout(5, 5));
+        
         cardContainer = new JPanel();
         cardContainer.setLayout(new GridLayout(0, 2, 10, 10));
         add(new JScrollPane(cardContainer), BorderLayout.CENTER);
@@ -38,40 +39,70 @@ public class DynamicsPanel extends JPanel{
 
         prevBtn.addActionListener(e -> {
             if (currentPage > 0) {
-                currentPage--;
-                refreshCards();
+                loadPage(currentPage - 1);
             }
         });
 
         nextBtn.addActionListener(e -> {
-            currentPage++;
-            refreshCards();
+            loadPage(currentPage + 1);
         });
 
-        refreshCards();
+        loadPage(0);
     }
 
+    private void loadPage(int page) {
+        if (page < 0) return;
+        prevBtn.setEnabled(false);
+        nextBtn.setEnabled(false);
+        pageLabel.setText("Loading…");
+
+        new SwingWorker<List<DroneDynamics>, Void>() {
+            private Exception error;
+
+            @Override
+            protected List<DroneDynamics> doInBackground() {
+                try {
+                    return provider.getPage(page, PAGE_SIZE);
+                } catch (Exception ex) {
+                    error = ex;
+                    return List.of();
+                }
+            }
+
+            @Override
+            protected void done() {
+                if (error != null) {
+                    JOptionPane.showMessageDialog(
+                        DynamicsPanel.this,
+                        "Error while loading data\n" + error.getMessage(),
+                        "Loading Error",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                    return;
+                }
+                try {
+                    currentPageData = get();
+                    // If empfy page is not first, stay
+                    if (currentPageData.isEmpty() && page != 0) {
+                        return;
+                    }
+                    currentPage = page;
+                    refreshCards();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }.execute();
+    }
     private void refreshCards() {
         cardContainer.removeAll();
-        List<String[]> data = getPageData(currentPage, PAGE_SIZE);
-        for (int i = 0; i < data.size(); i++) {
-            DroneDynamics dyn = dynamics.get(currentPage * PAGE_SIZE + i);
+        for (DroneDynamics dyn : currentPageData) {
             cardContainer.add(new DroneDynamicsCard(dyn));
         }
         pageLabel.setText("Page " + (currentPage + 1));
         prevBtn.setEnabled(currentPage > 0);
-        cardContainer.revalidate();
-        cardContainer.repaint();
-    }
-
-    @Override
-    public List<String[]> getPageData(int pageIndex, int pageSize) {
-        List<String[]> dummy = new ArrayList<>();
-        int start = pageIndex * pageSize;
-        int end = Math.min(start + pageSize, dynamics.size());
-        for (int i = start; i < end; i++) {
-            dummy.add(new String[]{}); // only needed for button logic
-        }
-        return dummy;
+        nextBtn.setEnabled(currentPageData.size() == PAGE_SIZE);
+        revalidate();
+        repaint();
     }
 }

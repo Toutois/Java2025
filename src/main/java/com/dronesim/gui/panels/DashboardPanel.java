@@ -13,9 +13,10 @@ import javax.swing.JTextField;
 import com.dronesim.gui.components.DroneStatusChartPanel;
 import com.dronesim.gui.components.TopSpeedRankingPanel;
 import com.dronesim.gui.paging.DronePaginationPanel;
+import com.dronesim.model.DroneDynamicsDataProvider;
 
 public class DashboardPanel extends JPanel {
-    public DashboardPanel() {
+    public DashboardPanel(int droneId) {
         setLayout(new BorderLayout(10, 10));
 
         // Oben: Suchleiste
@@ -42,8 +43,5 @@ public class DashboardPanel extends JPanel {
         for (int i = 1; i <= 35; i++) {
             data.add(new String[]{String.valueOf(i), "Drone-" + i, String.valueOf(20 + i), "Online"});
         }
-
-        DronePaginationPanel paginationPanel = new DronePaginationPanel(data);
-        add(paginationPanel, BorderLayout.SOUTH);
     }
 }

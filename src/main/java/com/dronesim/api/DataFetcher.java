@@ -2,9 +2,10 @@ package com.dronesim.api;
 
 import com.dronesim.model.DroneDynamics;
 import com.dronesim.parser.ManualJsonParser;
+import com.dronesim.api.DataFetcher;
 
 import java.net.URI;
-import java.net.URL;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -100,4 +101,12 @@ public class DataFetcher {
             scanner.close();
         }
     }
+
+
+    public List<DroneDynamics> fetchDroneDynamicsForDrone(int droneId, int limit, int offset) throws Exception {
+        String path = "/api/" + droneId + "/dynamics/?limit=" + limit + "&offset=" + offset;
+        String json = client.getJson(path);
+        return parser.parseDynamics(json);
+    }
+
 }

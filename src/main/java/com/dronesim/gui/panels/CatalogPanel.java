@@ -1,8 +1,8 @@
 package com.dronesim.gui.panels;
 
-import com.dronesim.model.PagedDataProvider;
 import com.dronesim.gui.paging.DronePaginationPanel;
 import com.dronesim.model.Drone;
+import com.dronesim.model.PagedDataProvider;
 
 import java.util.ArrayList;
 import java.util.List;

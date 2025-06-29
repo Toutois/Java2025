@@ -1,31 +1,58 @@
 package com.dronesim.gui.panels;
 
 import java.awt.BorderLayout;
-import java.util.List;
 
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 
-import com.dronesim.api.DataProvider;
-import com.dronesim.model.*;
-import com.dronesim.parser.ManualJsonParser;
+import com.dronesim.gui.panels.DashboardPanel;
+import com.dronesim.gui.panels.DynamicsPanel;
+import com.dronesim.model.DroneDynamicsDataProvider;
 
-public class MainTabbedPanel extends JPanel{
+public class MainTabbedPanel extends JPanel {
+    private final JTabbedPane tabs;
+    private DynamicsPanel dynamicsPanel;
+
     public MainTabbedPanel() {
         setLayout(new BorderLayout());
 
-        JTabbedPane tabs = new JTabbedPane();
-        DataProvider parser = new ManualJsonParser();
-        List<Drone> drones = parser.parseDrones(jsonString);
-        CatalogPanel cPanel = new CatalogPanel(drones);
-        tabs.addTab("Catalog", cPanel);
+        // 1) Steuer-Panel oben: ID-Feld + Load-Button
+        JPanel control = new JPanel();
+        JTextField idField = new JTextField("31", 5);
+        JButton loadBtn = new JButton("Load Drone");
+        control.add(new JLabel("Drone ID:"));
+        control.add(idField);
+        control.add(loadBtn);
+        add(control, BorderLayout.NORTH);
 
-        tabs.addTab("Dashboard", new DashboardPanel());
+        // 2) Tab‐Pane
+        tabs = new JTabbedPane();
+        tabs.addTab("Dashboard", new DashboardPanel(Integer.parseInt(idField.getText())));
+        // Dynamics‐Tab initial
+        dynamicsPanel = createDynamicsPanel(Integer.parseInt(idField.getText()));
+        tabs.addTab("Dynamics", dynamicsPanel);
+        add(tabs, BorderLayout.CENTER);
 
-        List<DroneDynamics> dyn = parser.parseDynamics(jsonString);
-        DynamicsPanel dPanel = new DynamicsPanel(dyn);
-        tabs.addTab("Dynamics", dPanel);
+        // 3) Action: bei Klick das Dynamics-Panel neu mit der neuen ID laden
+        loadBtn.addActionListener(e -> {
+            try {
+                int newId = Integer.parseInt(idField.getText().trim());
+                // Dashboard neu laden (falls dort ID relevant ist)
+                tabs.setComponentAt(0, new DashboardPanel(newId));
+                // Dynamics neu laden
+                dynamicsPanel = createDynamicsPanel(newId);
+                tabs.setComponentAt(1, dynamicsPanel);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(
+                    this, "Bitte eine gültige Zahl eingeben.",
+                    "Ungültige ID", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+    }
 
-        this.add(tabs, BorderLayout.CENTER);
+    /** Fabrikmethode für ein frisches DynamicsPanel mit neuem Provider */
+    private DynamicsPanel createDynamicsPanel(int droneId) {
+        return new DynamicsPanel(
+            new DroneDynamicsDataProvider(droneId)
+        );
     }
 }

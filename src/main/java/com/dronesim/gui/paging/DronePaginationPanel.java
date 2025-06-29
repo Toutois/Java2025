@@ -3,11 +3,13 @@ package com.dronesim.gui.paging;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import com.dronesim.model.interfaces.PagedDataProvider;
+import com.dronesim.model.DroneDynamics;
+import com.dronesim.model.PagedDataProvider;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
+import java.util.Vector;
 
 
 public class DronePaginationPanel extends JPanel {
@@ -17,9 +19,9 @@ public class DronePaginationPanel extends JPanel {
     private JLabel pageLabel;
     private int currentPage = 0;
     private final int PAGE_SIZE = 10;
-    private final PagedDataProvider dataProvider;
+    private final PagedDataProvider<DroneDynamics> dataProvider;
 
-    public DronePaginationPanel(PagedDataProvider dataProvider) {
+    public DronePaginationPanel(PagedDataProvider<DroneDynamics> dataProvider) {
         this.dataProvider = dataProvider;
         setLayout(new BorderLayout());
 
@@ -60,11 +62,25 @@ public class DronePaginationPanel extends JPanel {
 
     private void updateTable() {
         tableModel.setRowCount(0);
-        List<String[]> pageData = dataProvider.getPageData(currentPage, PAGE_SIZE);
-        for (String[] row : pageData) {
-            tableModel.addRow(row);
+        try {
+            List<DroneDynamics> pageData = dataProvider.getPage(currentPage, PAGE_SIZE);
+            for (DroneDynamics d : pageData) {
+                tableModel.addRow(new Object[]{
+                    d.getDrone(),
+                    d.getTimestamp(),
+                    d.getSpeed(),
+                    d.getBatteryStatus(),
+                    d.getStatus()
+                });
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this,
+            "Error while loading data:\n" + ex.getMessage(),
+            "Loading Error", JOptionPane.ERROR_MESSAGE);
         }
         prevButton.setEnabled(currentPage > 0);
+        nextButton.setEnabled(tableModel.getRowCount() == PAGE_SIZE);
+        pageLabel.setText("Page " + (currentPage + 1));
     }
 
     private void updatePageLabel() {

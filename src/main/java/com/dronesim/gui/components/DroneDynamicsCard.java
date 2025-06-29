@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.LineBorder;
 
+import com.dronesim.model.DroneDynamicsDataProvider;
+import com.dronesim.model.PagedDataProvider;
 import com.dronesim.model.DroneDynamics;
 
 public class DroneDynamicsCard extends JPanel{
