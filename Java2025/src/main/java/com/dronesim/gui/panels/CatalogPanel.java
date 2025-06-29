@@ -116,6 +116,7 @@ public class CatalogPanel extends JPanel {
                 int width = c.getPreferredSize().width + droneTypeTable.getIntercellSpacing().width;
                 preferredWidth = Math.max(preferredWidth, width);
                 
+                //
                 // Don't exceed max width
                 if (preferredWidth >= maxWidth) {
                     preferredWidth = maxWidth;
