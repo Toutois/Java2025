@@ -17,7 +17,7 @@ public class Main {
             loginDialog.setVisible(true);
 
             if (!loginDialog.isConfirmed()) {
-                System.exit(0);
+                 System.exit(0);
             }
 
             MainFrame app = new MainFrame();
