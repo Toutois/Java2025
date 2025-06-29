@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.dronesim</groupId>
+  <artifactId>dronesim-api</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <!-- Java 21 einstellen -->
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+  </properties>
+
+  <build>
+    <plugins>
+      <!-- erlaubt mvn exec:java zum Starten deiner Main‐Klasse -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <mainClass>com.dronesim.test.ApiExample</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!-- keine externen Dependencies nötig für java.net.http und Base64 -->
+  <dependencies>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20240303</version>
+    </dependency>
+  </dependencies>
+</project>
+
