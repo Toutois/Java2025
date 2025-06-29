@@ -1,0 +1,34 @@
+package com.dronesim.gui.components;
+
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.border.LineBorder;
+
+import com.dronesim.model.DroneDynamics;
+
+public class DroneDynamicsCard extends JPanel{
+    public DroneDynamicsCard(DroneDynamics dyn) {
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBorder(new LineBorder(Color.GRAY, 1, true));
+        setBackground(Color.WHITE);
+        setPreferredSize(new Dimension(250, 130));
+
+        JLabel type = new JLabel("Type: " + dyn.getDrone());
+        type.setFont(type.getFont().deriveFont(Font.BOLD));
+
+        JLabel battery = new JLabel("Battery: " + dyn.getBatteryStatus() + "%");
+        JLabel status = new JLabel("Status: " + dyn.getStatus());
+        JLabel timestamp = new JLabel("Timestamp: " + dyn.getTimestamp());
+        JLabel speed = new JLabel("Speed: " + dyn.getSpeed() + " km/h");
+        JLabel gps = new JLabel("GPS: longitude: " + dyn.getLongitude() + " - latitude: " + dyn.getLatitude());
+        JLabel seen = new JLabel("Last scene: " + dyn.getLastScene());
+
+        add(type);
+        add(battery);
+        add(status);
+        add(timestamp);
+        add(speed);
+        add(gps);
+        add(seen);
+    }
+}

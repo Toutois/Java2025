@@ -2,6 +2,8 @@ package com.dronesim.gui.panels;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -29,7 +31,15 @@ public class DashboardPanel extends JPanel {
         add(statsPanel, BorderLayout.CENTER);
 
         // Unten: Drohnenliste
-        DroneTablePanel tablePanel = new DroneTablePanel();
-        add(tablePanel, BorderLayout.SOUTH);
+        //DroneTablePanel tablePanel = new DroneTablePanel();
+        //add(tablePanel, BorderLayout.SOUTH);
+
+        List<String[]> data = new ArrayList<>();
+        for (int i = 1; i <= 35; i++) {
+            data.add(new String[]{String.valueOf(i), "Drone-" + i, String.valueOf(20 + i), "Online"});
+        }
+
+        DronePaginationPanel paginationPanel = new DronePaginationPanel(data);
+        add(paginationPanel, BorderLayout.SOUTH);
     }
 }
