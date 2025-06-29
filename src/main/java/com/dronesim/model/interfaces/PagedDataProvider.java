@@ -1,4 +1,4 @@
-package com.dronesim.model;
+package com.dronesim.model.interfaces;
 
 import java.util.List;
 

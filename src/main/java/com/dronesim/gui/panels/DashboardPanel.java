@@ -10,6 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.dronesim.gui.components.DroneStatusChartPanel;
+import com.dronesim.gui.components.TopSpeedRankingPanel;
+import com.dronesim.gui.paging.DronePaginationPanel;
+
 public class DashboardPanel extends JPanel {
     public DashboardPanel() {
         setLayout(new BorderLayout(10, 10));

@@ -1,9 +1,9 @@
-package com.dronesim.gui.panels;
+package com.dronesim.gui.paging;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import com.dronesim.model.PagedDataProvider;
+import com.dronesim.model.interfaces.PagedDataProvider;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

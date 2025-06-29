@@ -1,4 +1,4 @@
-package com.dronesim.gui.panels;
+package com.dronesim.gui.components;
 
 import java.awt.BorderLayout;
 
