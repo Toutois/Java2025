@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 
 import javax.swing.*;
 
-import com.dronesim.gui.panels.DashboardPanel;
-import com.dronesim.gui.panels.DynamicsPanel;
 import com.dronesim.model.DroneDynamicsDataProvider;
 
 public class MainTabbedPanel extends JPanel {

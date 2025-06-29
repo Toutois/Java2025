@@ -15,8 +15,8 @@ public class DroneDynamicsCard extends JPanel{
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(250, 130));
 
-        JLabel type = new JLabel("Type: " + dyn.getDrone());
-        type.setFont(type.getFont().deriveFont(Font.BOLD));
+        JLabel typeLabel = new JLabel("Type: " + dyn.getTypeName());
+        typeLabel.setFont(typeLabel.getFont().deriveFont(Font.BOLD));
 
         JLabel battery = new JLabel("Battery: " + dyn.getBatteryStatus() + "%");
         JLabel status = new JLabel("Status: " + dyn.getStatus());
@@ -25,7 +25,7 @@ public class DroneDynamicsCard extends JPanel{
         JLabel gps = new JLabel("GPS: longitude: " + dyn.getLongitude() + " - latitude: " + dyn.getLatitude());
         JLabel seen = new JLabel("Last scene: " + dyn.getLastScene());
 
-        add(type);
+        add(typeLabel);
         add(battery);
         add(status);
         add(timestamp);

@@ -1,6 +1,7 @@
 package com.dronesim.api;
 
 import com.dronesim.model.DroneDynamics;
+import com.dronesim.model.DroneType;
 import com.dronesim.parser.ManualJsonParser;
 import com.dronesim.api.DataFetcher;
 
@@ -8,6 +9,10 @@ import java.net.URI;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +21,7 @@ import org.json.JSONObject;
 public class DataFetcher {
     private final ApiClient client;
     private final ManualJsonParser parser;
+    private static final Map<Integer, String> typeCache = new HashMap<>();
 
     public DataFetcher() {
         ApiConfig cfg = new ApiConfig();
@@ -30,13 +36,7 @@ public class DataFetcher {
      * @param List of parsed DroneDynamics objects
     */
 
-    public List<DroneDynamics> fetchDroneDynamics(int limit, int offset) throws Exception {
-        String path = "/api/dronedynamics/?limit=" + limit + "&offset=" + offset;
-        String json = client.getJson(path);
-        return parser.parseDynamics(json);
-    }
-
-    /*
+    
     public void fetchDroneDynamicsWithPagination() throws Exception, InterruptedException {
         String path = "/api/dronedynamics/?limit=20&offset=0";  // Start-URL
 
@@ -48,7 +48,7 @@ public class DataFetcher {
 
         }
     }
-    */
+    
 
     private String extractNextPageUrl(String jsonResponse) {
         try {
@@ -103,10 +103,46 @@ public class DataFetcher {
     }
 
 
-    public List<DroneDynamics> fetchDroneDynamicsForDrone(int droneId, int limit, int offset) throws Exception {
+    public List<DroneDynamics> fetchDroneDynamics(int droneId, int limit, int offset) throws Exception {
         String path = "/api/" + droneId + "/dynamics/?limit=" + limit + "&offset=" + offset;
         String json = client.getJson(path);
-        return parser.parseDynamics(json);
+        List<DroneDynamics> list = parser.parseDynamics(json);
+    
+        if (typeCache.isEmpty()) {
+            String typesJson = client.getJson("/api/dronetypes/?limit=100&offset=0");
+            List<DroneType> types = parser.parseDroneTypes(typesJson);
+            for (DroneType t : types) {
+                typeCache.put(t.getId(), t.getTypename());
+            }
+        }
+        
+        for (DroneDynamics dd : list) {
+            String url = dd.getDrone();
+            URI uri = URI.create(url);
+            Pattern p = Pattern.compile(".*/(\\d+)/?$");
+            Matcher m = p.matcher(uri.getPath());
+            if (m.find()) {
+                int id = Integer.parseInt(m.group(1));
+                dd.setTypeName(typeCache.getOrDefault(id, "Unknown"));
+            } else {
+                dd.setTypeName("Unknown");
+            }
+
+        }
+
+        return list;
+    }
+
+    public List<DroneDynamics> fetchDroneDynamicsForDrone(int droneId, int limit, int offset) throws Exception {
+        return fetchDroneDynamics(droneId, limit, offset);
+    }
+
+
+
+    public List<DroneType> fetchAllDroneTypes() throws Exception {
+        String path = "/api/dronedynamics/?limit=100&offset=0";
+        String json = client.getJson(path);
+        return parser.parseDroneTypes(json);
     }
 
 }

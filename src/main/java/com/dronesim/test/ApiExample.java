@@ -40,14 +40,15 @@ public class ApiExample {
             // Files.writeString(Path.of("dynamics.json"), dynamicsJson, StandardCharsets.UTF_8);
             // System.out.println("dynamics.json saved (" + dynamicsJson.length() + " bytes)");
 
-            /* 
-            String dynamicsJson = client.getJson("/api/31/dynamics/?limit=10&offset=0");
-            Files.writeString(Path.of("dynamics.json"), dynamicsJson, StandardCharsets.UTF_8);            
-            System.out.println("dynamics.json saved (" + dynamicsJson.length() + " bytes)");
-            */
+            
+            //String dynamicsJson = client.getJson("/api/dronedynamics/31/?limit=10&offset=0");
+            //Files.writeString(Path.of("dynamics.json"), dynamicsJson, StandardCharsets.UTF_8);            
+            //System.out.println("dynamics.json saved (" + dynamicsJson.length() + " bytes)");
+            
 
             DataFetcher dataFetcher = new DataFetcher();
-            dataFetcher.fetchDroneDynamicsWithPaginationConfirmation(10, 31);
+            System.out.println(dataFetcher.fetchDroneDynamics(31,10, 0));
+
 
         } catch (Exception e) {
             e.printStackTrace();

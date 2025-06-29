@@ -9,7 +9,6 @@ import com.dronesim.model.PagedDataProvider;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
-import java.util.Vector;
 
 
 public class DronePaginationPanel extends JPanel {

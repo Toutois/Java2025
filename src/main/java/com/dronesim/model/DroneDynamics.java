@@ -34,6 +34,8 @@ public class DroneDynamics {
     // Online/offline status
     private String status;
 
+    private String typeName;
+
     // Full constructor – used when creating a dynamics record with all data
     public DroneDynamics(String drone, String timestamp, double speed, double alignRoll,
             double alignPitch, double alignYaw, double latitude, double longitude,
@@ -143,6 +145,16 @@ public class DroneDynamics {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+
 
     // Overridden toString method to display dynamics data in a readable format
     @Override

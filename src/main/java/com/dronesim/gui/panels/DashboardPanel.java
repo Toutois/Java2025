@@ -12,8 +12,6 @@ import javax.swing.JTextField;
 
 import com.dronesim.gui.components.DroneStatusChartPanel;
 import com.dronesim.gui.components.TopSpeedRankingPanel;
-import com.dronesim.gui.paging.DronePaginationPanel;
-import com.dronesim.model.DroneDynamicsDataProvider;
 
 public class DashboardPanel extends JPanel {
     public DashboardPanel(int droneId) {
