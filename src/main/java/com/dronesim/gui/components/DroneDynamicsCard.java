@@ -23,7 +23,7 @@ public class DroneDynamicsCard extends JPanel{
         JLabel timestamp = new JLabel("Timestamp: " + dyn.getTimestamp());
         JLabel speed = new JLabel("Speed: " + dyn.getSpeed() + " km/h");
         JLabel gps = new JLabel("GPS: longitude: " + dyn.getLongitude() + " - latitude: " + dyn.getLatitude());
-        JLabel seen = new JLabel("Last scene: " + dyn.getLastScene());
+        JLabel seen = new JLabel("Last seen: " + dyn.getLastScene());
 
         add(typeLabel);
         add(battery);
