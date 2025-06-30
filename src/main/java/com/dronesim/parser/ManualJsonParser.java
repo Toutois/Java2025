@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import com.dronesim.api.DataProvider;
 import com.dronesim.model.Drone;
@@ -11,6 +13,7 @@ import com.dronesim.model.DroneDynamics;
 import com.dronesim.model.DroneType;
 
 public class ManualJsonParser implements DataProvider {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 
     // get "results" array from json file
     private static String extractResultsArray(String fullJson) {
@@ -93,7 +96,11 @@ public class ManualJsonParser implements DataProvider {
             Map<String, String> map = toMap(item);
             DroneDynamics dd = new DroneDynamics();
             dd.setDrone(map.get("drone"));
-            dd.setTimestamp(map.get("timestamp"));
+            String ts = map.get("timestamp");
+            if (ts != null && !ts.isEmpty()) {
+                Date tsDate = sdf.parse(ts);
+                dd.setTimestamp(tsDate);
+            }
             dd.setSpeed(Double.parseDouble(map.get("speed")));
             dd.setAlignRoll(Double.parseDouble(map.getOrDefault("align_roll", "0")));
             dd.setAlignPitch(Double.parseDouble(map.getOrDefault("align_pitch", "0")));
@@ -102,7 +109,11 @@ public class ManualJsonParser implements DataProvider {
             dd.setLatitude(Double.parseDouble(map.getOrDefault("latitude", "0")));
             dd.setLongitude(Double.parseDouble(map.getOrDefault("longitude", "0")));
             dd.setBatteryStatus((Double.parseDouble(map.getOrDefault("battery_status", "0"))/100));
-            dd.setLastScene(map.getOrDefault("last_seen", ""));
+            String ls = map.getOrDefault("last_seen", "");
+            if (ls != null && !ls.isEmpty()) {
+                Date lsDate = sdf.parse(ls);
+                dd.setLastSeen(lsDate);
+            }
             dd.setStatus(map.getOrDefault("status", "offline"));
             list.add(dd);
         }
