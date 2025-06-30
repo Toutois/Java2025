@@ -1,4 +1,4 @@
-package com.dronesim.test;
+
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
