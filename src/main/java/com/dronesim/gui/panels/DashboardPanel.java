@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.dronesim.gui.components.DroneStatusChartPanel;
+import com.dronesim.gui.components.DroneTablePanel;
 import com.dronesim.gui.components.TopSpeedRankingPanel;
 
 public class DashboardPanel extends JPanel {
@@ -34,8 +35,8 @@ public class DashboardPanel extends JPanel {
         add(statsPanel, BorderLayout.CENTER);
 
         // Unten: Drohnenliste
-        //DroneTablePanel tablePanel = new DroneTablePanel();
-        //add(tablePanel, BorderLayout.SOUTH);
+        DroneTablePanel tablePanel = new DroneTablePanel();
+        add(tablePanel, BorderLayout.SOUTH);
 
         List<String[]> data = new ArrayList<>();
         for (int i = 1; i <= 35; i++) {

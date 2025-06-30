@@ -13,12 +13,12 @@ public class Main {
             dummyFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             dummyFrame.setLocationRelativeTo(null);
 
-            // TokenLoginDialog loginDialog = new TokenLoginDialog(dummyFrame);
-            // loginDialog.setVisible(true);
+            TokenLoginDialog loginDialog = new TokenLoginDialog(dummyFrame);
+            loginDialog.setVisible(true);
 
-            // if (!loginDialog.isConfirmed()) {
-            //      System.exit(0);
-            // }
+            if (!loginDialog.isConfirmed()) {
+                System.exit(0);
+            }
 
             MainFrame app = new MainFrame();
             app.setVisible(true);

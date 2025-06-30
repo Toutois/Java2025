@@ -138,13 +138,13 @@ public class DataFetcher {
     }
 
     public List<DroneType> fetchAllDroneTypes() throws Exception {
-    // Erstes Request, um Gesamtzahl abzurufen
-    String firstJson = client.getJson("/api/dronetypes/?limit=1&offset=0");
-    JSONObject firstRoot = new JSONObject(firstJson);
-    int total = firstRoot.getInt("count");
-    // Dann alle auf einmal laden
-    String json = client.getJson("/api/dronetypes/?limit=" + total + "&offset=0");
-    return parser.parseDroneTypes(json);
-}
+        // Erstes Request, um Gesamtzahl abzurufen
+        String firstJson = client.getJson("/api/dronetypes/?limit=1&offset=0");
+        JSONObject firstRoot = new JSONObject(firstJson);
+        int total = firstRoot.getInt("count");
+        // Dann alle auf einmal laden
+        String json = client.getJson("/api/dronetypes/?limit=" + total + "&offset=0");
+        return parser.parseDroneTypes(json);
+    }
 
 }

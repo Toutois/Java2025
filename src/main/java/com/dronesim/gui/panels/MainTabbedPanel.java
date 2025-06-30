@@ -9,8 +9,7 @@ import com.dronesim.model.DroneDynamicsDataProvider;
 public class MainTabbedPanel extends JPanel {
     private final JTabbedPane tabs;
     private DynamicsPanel dynamicsPanel;
-    private DroneTypePanel droneTypePanel;
-
+    
     public MainTabbedPanel() {
         setLayout(new BorderLayout());
 
