@@ -2,6 +2,8 @@ package com.dronesim.gui.panels;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -11,11 +13,6 @@ import javax.swing.JTextField;
 import com.dronesim.gui.components.DroneStatusChartPanel;
 import com.dronesim.gui.components.DroneTablePanel;
 import com.dronesim.gui.components.TopSpeedRankingPanel;
-<<<<<<< HEAD
-=======
-import com.dronesim.gui.paging.DronePaginationPanel;
-import com.dronesim.model.interfaces.PagedDataProvider;
->>>>>>> 338a909 (reorder)
 
 public class DashboardPanel extends JPanel {
     public DashboardPanel(int droneId) {
@@ -37,7 +34,6 @@ public class DashboardPanel extends JPanel {
         statsPanel.add(new TopSpeedRankingPanel());
         add(statsPanel, BorderLayout.CENTER);
 
-<<<<<<< HEAD
         // Unten: Drohnenliste
         DroneTablePanel tablePanel = new DroneTablePanel();
         add(tablePanel, BorderLayout.SOUTH);
@@ -46,15 +42,5 @@ public class DashboardPanel extends JPanel {
         for (int i = 1; i <= 35; i++) {
             data.add(new String[]{String.valueOf(i), "Drone-" + i, String.valueOf(20 + i), "Online"});
         }
-=======
-        // Unten: Paging ohne Daten
-        DronePaginationPanel paginationPanel = new DronePaginationPanel(new PagedDataProvider() {
-            @Override
-            public java.util.List<String[]> getPageData(int pageIndex, int pageSize) {
-                return java.util.Collections.emptyList();
-            }
-        });
-        add(paginationPanel, BorderLayout.SOUTH);
->>>>>>> 338a909 (reorder)
     }
 }
