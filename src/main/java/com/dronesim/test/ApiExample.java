@@ -46,9 +46,11 @@ public class ApiExample {
             //System.out.println("dynamics.json saved (" + dynamicsJson.length() + " bytes)");
             
 
-            DataFetcher dataFetcher = new DataFetcher();
-            System.out.println(dataFetcher.fetchDroneDynamics(31,10, 0));
+            //DataFetcher dataFetcher = new DataFetcher();
+            //System.out.println(dataFetcher.fetchDroneDynamics(31,10, 0));
 
+            DataFetcher dataFetcher2 = new DataFetcher();
+            System.out.println(dataFetcher2.fetchAllDroneTypes());
 
         } catch (Exception e) {
             e.printStackTrace();

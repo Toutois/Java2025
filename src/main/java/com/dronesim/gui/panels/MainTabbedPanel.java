@@ -9,6 +9,7 @@ import com.dronesim.model.DroneDynamicsDataProvider;
 public class MainTabbedPanel extends JPanel {
     private final JTabbedPane tabs;
     private DynamicsPanel dynamicsPanel;
+    private DroneTypePanel droneTypePanel;
 
     public MainTabbedPanel() {
         setLayout(new BorderLayout());
@@ -29,6 +30,7 @@ public class MainTabbedPanel extends JPanel {
         dynamicsPanel = createDynamicsPanel(Integer.parseInt(idField.getText()));
         tabs.addTab("Dynamics", dynamicsPanel);
         add(tabs, BorderLayout.CENTER);
+        tabs.addTab("Drone Catalog", new DroneTypePanel());
 
         // 3) Action: bei Klick das Dynamics-Panel neu mit der neuen ID laden
         loadBtn.addActionListener(e -> {

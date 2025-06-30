@@ -137,12 +137,14 @@ public class DataFetcher {
         return fetchDroneDynamics(droneId, limit, offset);
     }
 
-
-
     public List<DroneType> fetchAllDroneTypes() throws Exception {
-        String path = "/api/dronedynamics/?limit=100&offset=0";
-        String json = client.getJson(path);
-        return parser.parseDroneTypes(json);
-    }
+    // Erstes Request, um Gesamtzahl abzurufen
+    String firstJson = client.getJson("/api/dronetypes/?limit=1&offset=0");
+    JSONObject firstRoot = new JSONObject(firstJson);
+    int total = firstRoot.getInt("count");
+    // Dann alle auf einmal laden
+    String json = client.getJson("/api/dronetypes/?limit=" + total + "&offset=0");
+    return parser.parseDroneTypes(json);
+}
 
 }
