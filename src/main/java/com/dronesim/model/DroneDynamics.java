@@ -1,5 +1,7 @@
 package com.dronesim.model;
 
+import java.util.Date;
+
 /**
  * Represents the real-time dynamics data of an individual drone in the
  * simulation system. Holds data such as speed, orientation (roll, pitch, yaw),
@@ -11,7 +13,7 @@ public class DroneDynamics {
     private String drone;
 
     // Timestamp of the recorded data
-    private String timestamp;
+    private Date timestamp;
 
     // Current speed of the drone in m/s
     private double speed;
@@ -29,7 +31,7 @@ public class DroneDynamics {
     private double batteryStatus;
 
     // Name or identifier of the last scene or task
-    private String lastScene;
+    private Date lastSeen;
 
     // Online/offline status
     private String status;
@@ -37,9 +39,9 @@ public class DroneDynamics {
     private String typeName;
 
     // Full constructor – used when creating a dynamics record with all data
-    public DroneDynamics(String drone, String timestamp, double speed, double alignRoll,
+    public DroneDynamics(String drone, Date timestamp, double speed, double alignRoll,
             double alignPitch, double alignYaw, double latitude, double longitude,
-            double batteryStatus, String lastScene, String status) {
+            double batteryStatus, Date lastSeen, String status) {
         this.drone = drone;
         this.timestamp = timestamp;
         this.speed = speed;
@@ -49,7 +51,7 @@ public class DroneDynamics {
         this.latitude = latitude;
         this.longitude = longitude;
         this.batteryStatus = batteryStatus;
-        this.lastScene = lastScene;
+        this.lastSeen = lastSeen;
         this.status = status;
     }
 
@@ -66,11 +68,11 @@ public class DroneDynamics {
         this.drone = drone;
     }
 
-    public String getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -130,12 +132,12 @@ public class DroneDynamics {
         this.batteryStatus = batteryStatus;
     }
 
-    public String getLastScene() {
-        return lastScene;
+    public Date getLastSeen() {
+        return lastSeen;
     }
 
-    public void setLastScene(String lastScene) {
-        this.lastScene = lastScene;
+    public void setLastSeen(Date lastSeen) {
+        this.lastSeen = lastSeen;
     }
 
     public String getStatus() {
@@ -169,7 +171,7 @@ public class DroneDynamics {
                 + ", latitude=" + latitude + '\''
                 + ", longitude=" + longitude + '\''
                 + ", batteryStatus=" + batteryStatus + '\''
-                + ", lastScene='" + lastScene + '\''
+                + ", lastScene='" + lastSeen + '\''
                 + ", status='" + status + '\''
                 + '}';
     }

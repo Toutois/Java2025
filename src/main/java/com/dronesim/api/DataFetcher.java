@@ -116,6 +116,7 @@ public class DataFetcher {
             }
         }
         
+
         for (DroneDynamics dd : list) {
             String url = dd.getDrone();
             URI uri = URI.create(url);
@@ -133,9 +134,11 @@ public class DataFetcher {
         return list;
     }
 
+
     public List<DroneDynamics> fetchDroneDynamicsForDrone(int droneId, int limit, int offset) throws Exception {
         return fetchDroneDynamics(droneId, limit, offset);
     }
+
 
     public List<DroneType> fetchAllDroneTypes() throws Exception {
         // Erstes Request, um Gesamtzahl abzurufen
@@ -146,5 +149,4 @@ public class DataFetcher {
         String json = client.getJson("/api/dronetypes/?limit=" + total + "&offset=0");
         return parser.parseDroneTypes(json);
     }
-
 }
