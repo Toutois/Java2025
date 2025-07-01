@@ -1,8 +1,16 @@
 package com.dronesim.gui.panels;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingWorker;
 
 import com.dronesim.gui.components.DroneDynamicsCard;
 import com.dronesim.model.DroneDynamics;

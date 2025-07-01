@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import com.dronesim.gui.components.DroneStatusChartPanel;
 import com.dronesim.gui.components.DroneTablePanel;
@@ -18,14 +16,14 @@ public class DashboardPanel extends JPanel {
     public DashboardPanel(int droneId) {
         setLayout(new BorderLayout(10, 10));
 
-        // Oben: Suchleiste
+        /*// Oben: Suchleiste
         JPanel searchPanel = new JPanel(new BorderLayout(5, 5));
         JTextField searchField = new JTextField();
         searchField.setToolTipText("Search drones...");
         searchPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 10));
         searchPanel.add(new JLabel("🔍"), BorderLayout.WEST);
         searchPanel.add(searchField, BorderLayout.CENTER);
-        add(searchPanel, BorderLayout.NORTH);
+        add(searchPanel, BorderLayout.NORTH);*/
 
         // Mitte: PieChart + Top 5 Rangliste
         JPanel statsPanel = new JPanel(new GridLayout(1, 2, 10, 10));
