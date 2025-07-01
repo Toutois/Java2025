@@ -1,12 +1,17 @@
 package com.dronesim.gui.panels;
 
+import java.awt.BorderLayout;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingWorker;
+import javax.swing.table.DefaultTableModel;
+
 import com.dronesim.api.DataFetcher;
 import com.dronesim.model.DroneType;
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.util.List;
 
 /**
  * Ein Panel, das alle Attribute von DroneType in einer Tabelle anzeigt.
@@ -17,7 +22,13 @@ public class DroneTypePanel extends JPanel {
 
         // Spaltennamen entsprechend DroneType
         String[] columns = {"ID", "Manufacturer", "Type Name", "Weight", "Max Speed", "Battery Capacity", "Control Range", "Max Carriage"};
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
+        DefaultTableModel model = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Make all columns non-editable
+                return false;
+            }
+        };
         JTable table = new JTable(model);
         table.setAutoCreateRowSorter(true);
         add(new JScrollPane(table), BorderLayout.CENTER);
